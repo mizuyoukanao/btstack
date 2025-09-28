@@ -622,14 +622,14 @@ static void packet_handler(uint8_t packet_type, uint16_t channel, uint8_t * pack
                         device->report_id = packet[pos++];
                     }
                     
-                    if (hid_report_id_status(device->cid, device->report_id) == HID_REPORT_ID_INVALID){
-                        log_info("Ignore invalid report data packet");
-                        break;
-                    }
-                    if (!hid_report_size_valid(device->cid, device->report_id, device->report_type, packet_size - pos)){
-                        log_info("Ignore invalid report data packet, invalid size");
-                        break;
-                    }
+                    //if (hid_report_id_status(device->cid, device->report_id) == HID_REPORT_ID_INVALID){
+                    //    log_info("Ignore invalid report data packet");
+                    //    break;
+                    //}
+                    //if (!hid_report_size_valid(device->cid, device->report_id, device->report_type, packet_size - pos)){
+                    //    log_info("Ignore invalid report data packet, invalid size");
+                    //    break;
+                    //}
                     (*hci_device_report_data)(device->cid, device->report_type, device->report_id, packet_size - pos, &packet[pos]);
                     break;
                 default:

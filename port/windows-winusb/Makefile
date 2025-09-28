@@ -9,7 +9,7 @@ COMMON  += rijndael.c
 include ${BTSTACK_ROOT}/example/Makefile.inc
 
 # CC = gcc-fsf-4.9
-CFLAGS  += -g -Wall -Wmissing-prototypes -Wstrict-prototypes -Wshadow -Werror
+CFLAGS  += -g -Wall -Wmissing-prototypes -Wstrict-prototypes -Wshadow
 
 CFLAGS += -I${BTSTACK_ROOT}/platform/windows \
 		  -I${BTSTACK_ROOT}/platform/posix \
@@ -39,5 +39,8 @@ EXAMPLES += pan_lwip_http_server
 
 csr_set_bd_addr: ${CORE_OBJ} ${COMMON_OBJ} btstack_chipset_csr.o csr_set_bd_addr.o
 	${CC} $^ ${CFLAGS} ${LDFLAGS} -o $@
+
+btkeyLib: ${CORE_OBJ} ${COMMON_OBJ} ${CLASSIC_OBJ} ${SDP_CLIENT} btstack_ring_buffer.o hid_device.o btstack_hid_parser.o btkeyLib.o
+	${CC} $^ ${CFLAGS} ${LDFLAGS} -g -o $@ -shared
 
 all: ${EXAMPLES}
